@@ -19,29 +19,34 @@ function getDiscriminant(a, b, c) {
 }
 
 function printQuadraticSolutions(a, b, c) {
-	//TOO DO
+	let discriminant = getDiscriminant(a, b, c);
+	let sqrtDiscriminant = Math.sqrt(discriminant);
+	let solution1 = (-b + sqrtDiscriminant) / 2 / a;
+	let solution2 = (-b - sqrtDiscriminant) / 2 / a;
+	console.log(`This equation has two solutions: ${solution1} and ${solution2}`);
 }
 
 function printSingleSolution(a, b) {
-	//TOO DO
+	console.log(`This equation has one solution: ${-b / 2 / a}`);
 }
 
 function printComplexSolutions() {
-	//TOO DO
+	console.log("This equation has complex solutions");
 }
 
 function quadraticEquation(a, b, c) {
+	let tolerance = 1e-9;
 	// Step one: get a, b ,c
 	[a, b, c] = getCoefficients();
 
 	// Step 2: calculate b**2 - 4*a*c
 	let discriminant = getDiscriminant(a, b, c);
 	// Step 3: Determine how many solutions equation has and calculate them
-	if (discriminant > 0) {
+	if (discriminant > tolerance) {
 		printQuadraticSolutions(a, b, c);
-	} else if (discriminant === 0) {
-		printSingleSolution(a, b);
-	} else {
+	} else if (discriminant < -tolerance) {
 		printComplexSolutions();
+	} else {
+		printSingleSolution(a, b);
 	}
 }
